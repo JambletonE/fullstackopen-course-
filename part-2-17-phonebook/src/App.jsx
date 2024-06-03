@@ -105,11 +105,17 @@ const App = () => {
     
 
 
-  const deletePerson = (id) => {
-    if (window.confirm("Delete: " + getNameById(id) + "?")) {
-   phoneBookServices.removeOne(id)
-    const updatedPersons = persons.filter(person => person.id !== id);
-    }
+    const deletePerson = (id) => {
+      if (window.confirm("Delete: " + getNameById(id) + "?")) {
+        
+        phoneBookServices.removeOne(id).then(() => {
+          const updatedPersons = persons.filter(person => person.id !== id);
+          setPersons(updatedPersons);
+        
+        }).catch(error => {
+          console.error("Error deleting person:", error);
+        });
+      }
     }
 
   const handlePersonChange = (event) => {

@@ -13,9 +13,11 @@ const create = async newObject => {
   const response = await request;
   return response.data;
 }
-const removeOne = (id) => {
+
+const removeOne = async (id) => {
   const request = axios.delete(baseUrl+`/${id}`)
-  return request.then(response => response.data)
+  const response = await request;
+  return response.data;
 };
 
 const replace = (oldObject, newObject) => {
